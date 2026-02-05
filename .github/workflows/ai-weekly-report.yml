@@ -1,4 +1,3 @@
-# .github/workflows/ai-weekly-report.yml
 name: 🤖 Generate AI Weekly Report
 
 on:
