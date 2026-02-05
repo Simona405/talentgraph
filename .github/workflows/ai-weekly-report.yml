@@ -2,8 +2,8 @@ name: 🤖 Generate AI Weekly Report
 
 on:
   schedule:
-    - cron: '0 2 * * 1'  # 每周一 02:00 UTC（北京时间 10:00）
-  workflow_dispatch:     # 允许手动触发
+    - cron: '0 2 * * 1'
+  workflow_dispatch:
 
 jobs:
   generate:
@@ -27,11 +27,11 @@ jobs:
           GH_TOKEN: ${{ secrets.GH_TOKEN }}
         run: python scripts/generate_report.py
 
-      - name: 📤 Commit and push report (if changed)
+      - name: 📤 Commit and push report
         run: |
           git config --global user.name "github-actions[bot]"
           git config --global user.email "github-actions[bot]@users.noreply.github.com"
-          git add reports/
+          git add reports/ || true
           if ! git diff --staged --quiet; then
             git commit -m "📝 Add AI weekly report"
             git push
